@@ -34,6 +34,7 @@ import com.tngtech.archunit.core.domain.JavaCall;
 import com.tngtech.archunit.core.domain.JavaClass;
 import com.tngtech.archunit.core.domain.JavaConstructorCall;
 import com.tngtech.archunit.core.domain.JavaFieldAccess;
+import com.tngtech.archunit.core.domain.JavaMember;
 import com.tngtech.archunit.core.domain.JavaMethodCall;
 import com.tngtech.archunit.core.domain.JavaModifier;
 import com.tngtech.archunit.core.domain.properties.CanBeAnnotated;
@@ -518,45 +519,47 @@ public final class ArchConditions {
     }
 
     @PublicAPI(usage = ACCESS)
-    public static ArchCondition<JavaClass> beAnnotatedWith(Class<? extends Annotation> type) {
+    public static <T extends CanBeAnnotated & HasName> ArchCondition<T> beAnnotatedWith(Class<? extends Annotation> type) {
         return createAnnotatedCondition(HasAnnotations.Predicates.annotatedWith(type));
     }
 
     @PublicAPI(usage = ACCESS)
-    public static ArchCondition<JavaClass> notBeAnnotatedWith(Class<? extends Annotation> type) {
-        return not(beAnnotatedWith(type));
+    public static <T extends CanBeAnnotated & HasName> ArchCondition<T> notBeAnnotatedWith(Class<? extends Annotation> type) {
+        return not(ArchConditions.<T>beAnnotatedWith(type));
     }
 
     @PublicAPI(usage = ACCESS)
-    public static ArchCondition<JavaClass> beAnnotatedWith(String typeName) {
+    public static <T extends CanBeAnnotated & HasName> ArchCondition<T> beAnnotatedWith(String typeName) {
         return createAnnotatedCondition(HasAnnotations.Predicates.annotatedWith(typeName));
     }
 
     @PublicAPI(usage = ACCESS)
-    public static ArchCondition<JavaClass> notBeAnnotatedWith(String typeName) {
-        return not(beAnnotatedWith(typeName));
+    public static <T extends CanBeAnnotated & HasName> ArchCondition<T> notBeAnnotatedWith(String typeName) {
+        return not(ArchConditions.<T>beAnnotatedWith(typeName));
     }
 
     @PublicAPI(usage = ACCESS)
-    public static ArchCondition<JavaClass> beAnnotatedWith(final DescribedPredicate<? super JavaAnnotation> predicate) {
+    public static <T extends CanBeAnnotated & HasName> ArchCondition<T> beAnnotatedWith(final DescribedPredicate<? super JavaAnnotation> predicate) {
         return createAnnotatedCondition(HasAnnotations.Predicates.annotatedWith(predicate));
     }
 
     @PublicAPI(usage = ACCESS)
-    public static ArchCondition<JavaClass> notBeAnnotatedWith(DescribedPredicate<? super JavaAnnotation> predicate) {
-        return not(beAnnotatedWith(predicate));
+    public static <T extends CanBeAnnotated & HasName> ArchCondition<T> notBeAnnotatedWith(DescribedPredicate<? super JavaAnnotation> predicate) {
+        return not(ArchConditions.<T>beAnnotatedWith(predicate));
     }
 
-    private static ArchCondition<JavaClass> createAnnotatedCondition(final DescribedPredicate<CanBeAnnotated> annotatedWith) {
-        return new ArchCondition<JavaClass>(be(annotatedWith).getDescription()) {
+    private static <T extends CanBeAnnotated & HasName> ArchCondition<T> createAnnotatedCondition(final DescribedPredicate<CanBeAnnotated> annotatedWith) {
+        return new ArchCondition<T>(be(annotatedWith).getDescription()) {
             @Override
-            public void check(JavaClass item, ConditionEvents events) {
+            public void check(T item, ConditionEvents events) {
                 boolean satisfied = annotatedWith.apply(item);
-                String message = String.format("class %s is %s%s in %s",
-                        item.getName(),
+                String message = String.format("%s is %s%s",
+                        item instanceof JavaMember ? ((JavaMember) item).getFullName() : item.getName(),
                         satisfied ? "" : "not ",
-                        annotatedWith.getDescription(),
-                        formatLocation(item, 0));
+                        annotatedWith.getDescription());
+                if (item instanceof JavaClass) {
+                    message = String.format("class %s in %s", message, formatLocation((JavaClass) item, 0));
+                }
                 events.add(new SimpleConditionEvent(item, satisfied, message));
             }
         };

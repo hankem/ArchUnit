@@ -591,15 +591,15 @@ public class ClassesShouldTest {
         return $$(
                 $(classes().should().beAnnotatedWith(RuntimeRetentionAnnotation.class),
                         SomeAnnotatedClass.class, String.class),
-                $(classes().should(ArchConditions.beAnnotatedWith(RuntimeRetentionAnnotation.class)),
+                $(classes().should(ArchConditions.<JavaClass>beAnnotatedWith(RuntimeRetentionAnnotation.class)),
                         SomeAnnotatedClass.class, String.class),
                 $(classes().should().beAnnotatedWith(RuntimeRetentionAnnotation.class.getName()),
                         SomeAnnotatedClass.class, String.class),
-                $(classes().should(ArchConditions.beAnnotatedWith(RuntimeRetentionAnnotation.class.getName())),
+                $(classes().should(ArchConditions.<JavaClass>beAnnotatedWith(RuntimeRetentionAnnotation.class.getName())),
                         SomeAnnotatedClass.class, String.class),
                 $(classes().should().beAnnotatedWith(annotation(RuntimeRetentionAnnotation.class)),
                         SomeAnnotatedClass.class, String.class),
-                $(classes().should(ArchConditions.beAnnotatedWith(annotation(RuntimeRetentionAnnotation.class))),
+                $(classes().should(ArchConditions.<JavaClass>beAnnotatedWith(annotation(RuntimeRetentionAnnotation.class))),
                         SomeAnnotatedClass.class, String.class));
     }
 
@@ -635,15 +635,15 @@ public class ClassesShouldTest {
         return $$(
                 $(classes().should().notBeAnnotatedWith(RuntimeRetentionAnnotation.class),
                         String.class, SomeAnnotatedClass.class),
-                $(classes().should(ArchConditions.notBeAnnotatedWith(RuntimeRetentionAnnotation.class)),
+                $(classes().should(ArchConditions.<JavaClass>notBeAnnotatedWith(RuntimeRetentionAnnotation.class)),
                         String.class, SomeAnnotatedClass.class),
                 $(classes().should().notBeAnnotatedWith(RuntimeRetentionAnnotation.class.getName()),
                         String.class, SomeAnnotatedClass.class),
-                $(classes().should(ArchConditions.notBeAnnotatedWith(RuntimeRetentionAnnotation.class.getName())),
+                $(classes().should(ArchConditions.<JavaClass>notBeAnnotatedWith(RuntimeRetentionAnnotation.class.getName())),
                         String.class, SomeAnnotatedClass.class),
                 $(classes().should().notBeAnnotatedWith(annotation(RuntimeRetentionAnnotation.class)),
                         String.class, SomeAnnotatedClass.class),
-                $(classes().should(ArchConditions.notBeAnnotatedWith(annotation(RuntimeRetentionAnnotation.class))),
+                $(classes().should(ArchConditions.<JavaClass>notBeAnnotatedWith(annotation(RuntimeRetentionAnnotation.class))),
                         String.class, SomeAnnotatedClass.class));
     }
 
