@@ -78,7 +78,7 @@ public class JavaTypeTest {
     }
 
     @Test
-    public void resolving_throws_exception_if_type_doesnt_exist() {
+    public void resolving_throws_exception_if_type_does_not_exist() {
         thrown.expect(ReflectionException.class);
         JavaType.From.name("does.not.exist").resolveClass();
     }

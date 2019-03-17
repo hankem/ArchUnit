@@ -103,7 +103,7 @@ public class ExpectedTestFailures {
                     wrongViolations.describe()));
         }
         if (!remainingExpected.isEmpty()) {
-            fail(String.format("Some expected violations haven't occurred. Expected:%n%s", remainingExpected.describe()));
+            fail(String.format("Some expected violations have not occurred. Expected:%n%s", remainingExpected.describe()));
         }
     }
 

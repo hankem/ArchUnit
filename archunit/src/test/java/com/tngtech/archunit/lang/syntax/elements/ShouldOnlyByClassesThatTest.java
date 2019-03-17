@@ -70,18 +70,6 @@ public class ShouldOnlyByClassesThatTest {
 
     @Test
     @UseDataProvider("should_only_be_by_rule_starts")
-    public void dontHaveFullyQualifiedName(ClassesThat<ClassesShouldConjunction> classesShouldOnlyBeBy) {
-        Set<JavaClass> classes = filterClassesAppearingInFailureReport(
-                classesShouldOnlyBeBy.dontHaveFullyQualifiedName(Foo.class.getName()))
-                .on(ClassAccessedByFoo.class, Foo.class,
-                        ClassAccessedByBar.class, Bar.class,
-                        ClassAccessedByBaz.class, Baz.class);
-
-        assertThatClasses(classes).matchInAnyOrder(ClassAccessedByFoo.class, Foo.class);
-    }
-
-    @Test
-    @UseDataProvider("should_only_be_by_rule_starts")
     public void doNotHaveFullyQualifiedName(ClassesThat<ClassesShouldConjunction> classesShouldOnlyBeBy) {
         Set<JavaClass> classes = filterClassesAppearingInFailureReport(
                 classesShouldOnlyBeBy.doNotHaveFullyQualifiedName(Foo.class.getName()))
@@ -104,18 +92,6 @@ public class ShouldOnlyByClassesThatTest {
         assertThatClasses(classes).matchInAnyOrder(
                 ClassAccessedByBar.class, Bar.class,
                 ClassAccessedByBaz.class, Baz.class);
-    }
-
-    @Test
-    @UseDataProvider("should_only_be_by_rule_starts")
-    public void dontHaveSimpleName(ClassesThat<ClassesShouldConjunction> classesShouldOnlyBeBy) {
-        Set<JavaClass> classes = filterClassesAppearingInFailureReport(
-                classesShouldOnlyBeBy.dontHaveSimpleName(Foo.class.getSimpleName()))
-                .on(ClassAccessedByFoo.class, Foo.class,
-                        ClassAccessedByBar.class, Bar.class,
-                        ClassAccessedByBaz.class, Baz.class);
-
-        assertThatClasses(classes).matchInAnyOrder(ClassAccessedByFoo.class, Foo.class);
     }
 
     @Test
@@ -409,19 +385,6 @@ public class ShouldOnlyByClassesThatTest {
 
     @Test
     @UseDataProvider("should_only_be_by_rule_starts")
-    public void dontHaveModifier(ClassesThat<ClassesShouldConjunction> classesShouldOnlyBeBy) {
-        Set<JavaClass> classes = filterClassesAppearingInFailureReport(classesShouldOnlyBeBy.dontHaveModifier(PRIVATE))
-                .on(ClassAccessedByPublicClass.class, ClassAccessedByPrivateClass.class,
-                        ClassAccessedByPackagePrivateClass.class, ClassAccessedByProtectedClass.class,
-                        PublicClass.class, PrivateClass.class,
-                        PackagePrivateClass.class, ProtectedClass.class);
-
-        assertThatClasses(classes).matchInAnyOrder(
-                ClassAccessedByPrivateClass.class, PrivateClass.class);
-    }
-
-    @Test
-    @UseDataProvider("should_only_be_by_rule_starts")
     public void doNotHaveModifier(ClassesThat<ClassesShouldConjunction> classesShouldOnlyBeBy) {
         Set<JavaClass> classes = filterClassesAppearingInFailureReport(classesShouldOnlyBeBy.doNotHaveModifier(PRIVATE))
                 .on(ClassAccessedByPublicClass.class, ClassAccessedByPrivateClass.class,
@@ -597,17 +560,6 @@ public class ShouldOnlyByClassesThatTest {
 
     @Test
     @UseDataProvider("should_only_be_by_rule_starts")
-    public void dontImplement_type(ClassesThat<ClassesShouldConjunction> classesShouldOnlyBeBy) {
-        Set<JavaClass> classes = filterClassesAppearingInFailureReport(
-                classesShouldOnlyBeBy.dontImplement(SomeInterface.class))
-                .on(ClassImplementingSomeInterface.class, ClassBeingAccessedByClassImplementingSomeInterface.class,
-                        SimpleClass.class, ClassAccessingSimpleClass.class);
-
-        assertThatClasses(classes).matchInAnyOrder(ClassImplementingSomeInterface.class, ClassBeingAccessedByClassImplementingSomeInterface.class);
-    }
-
-    @Test
-    @UseDataProvider("should_only_be_by_rule_starts")
     public void doNotImplement_type(ClassesThat<ClassesShouldConjunction> classesShouldOnlyBeBy) {
         Set<JavaClass> classes = filterClassesAppearingInFailureReport(
                 classesShouldOnlyBeBy.doNotImplement(SomeInterface.class))
@@ -630,17 +582,6 @@ public class ShouldOnlyByClassesThatTest {
 
     @Test
     @UseDataProvider("should_only_be_by_rule_starts")
-    public void dontImplement_typeName(ClassesThat<ClassesShouldConjunction> classesShouldOnlyBeBy) {
-        Set<JavaClass> classes = filterClassesAppearingInFailureReport(
-                classesShouldOnlyBeBy.dontImplement(SomeInterface.class.getName()))
-                .on(ClassImplementingSomeInterface.class, ClassBeingAccessedByClassImplementingSomeInterface.class,
-                        SimpleClass.class, ClassAccessingSimpleClass.class);
-
-        assertThatClasses(classes).matchInAnyOrder(ClassImplementingSomeInterface.class, ClassBeingAccessedByClassImplementingSomeInterface.class);
-    }
-
-    @Test
-    @UseDataProvider("should_only_be_by_rule_starts")
     public void doNotImplement_typeName(ClassesThat<ClassesShouldConjunction> classesShouldOnlyBeBy) {
         Set<JavaClass> classes = filterClassesAppearingInFailureReport(
                 classesShouldOnlyBeBy.doNotImplement(SomeInterface.class.getName()))
@@ -659,17 +600,6 @@ public class ShouldOnlyByClassesThatTest {
                         SimpleClass.class, ClassAccessingSimpleClass.class);
 
         assertThatClasses(classes).matchInAnyOrder(SimpleClass.class, ClassAccessingSimpleClass.class);
-    }
-
-    @Test
-    @UseDataProvider("should_only_be_by_rule_starts")
-    public void dontImplement_predicate(ClassesThat<ClassesShouldConjunction> classesShouldOnlyBeBy) {
-        Set<JavaClass> classes = filterClassesAppearingInFailureReport(
-                classesShouldOnlyBeBy.dontImplement(classWithNameOf(SomeInterface.class)))
-                .on(ClassImplementingSomeInterface.class, ClassBeingAccessedByClassImplementingSomeInterface.class,
-                        SimpleClass.class, ClassAccessingSimpleClass.class);
-
-        assertThatClasses(classes).matchInAnyOrder(ClassImplementingSomeInterface.class, ClassBeingAccessedByClassImplementingSomeInterface.class);
     }
 
     @Test

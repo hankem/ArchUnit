@@ -25,7 +25,7 @@ public class DependencyAssertion extends AbstractObjectAssert<DependencyAssertio
         return this;
     }
 
-    public DependencyAssertion doesntMatch(Class<?> originClass, Class<?> targetClass) {
+    public DependencyAssertion doesNotMatch(Class<?> originClass, Class<?> targetClass) {
         for (AbstractBooleanAssert<?> dependencyAssert : dependencyMatches(originClass, targetClass)) {
             dependencyAssert.isFalse();
         }
@@ -57,7 +57,7 @@ public class DependencyAssertion extends AbstractObjectAssert<DependencyAssertio
         return this;
     }
 
-    public void doesntMatchOrigin(Class<?> originClass) {
+    public void doesNotMatchOrigin(Class<?> originClass) {
         for (AbstractBooleanAssert<?> dependencyOriginAssert : dependencyMatchesOrigin(originClass)) {
             dependencyOriginAssert.isFalse();
         }
@@ -80,7 +80,7 @@ public class DependencyAssertion extends AbstractObjectAssert<DependencyAssertio
         return this;
     }
 
-    public void doesntMatchTarget(Class<?> targetClass) {
+    public void doesNotMatchTarget(Class<?> targetClass) {
         for (AbstractBooleanAssert<?> dependencyTargetAssert : dependencyMatchesTarget(targetClass)) {
             dependencyTargetAssert.isFalse();
         }

@@ -67,7 +67,7 @@ public class DependencyTest {
     public void origin_predicates_match() {
         assertThatDependency(Origin.class, Target.class)
                 .matchesOrigin(Origin.class)
-                .doesntMatchOrigin(Target.class);
+                .doesNotMatchOrigin(Target.class);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class DependencyTest {
     public void target_predicates_match() {
         assertThatDependency(Origin.class, Target.class)
                 .matchesTarget(Target.class)
-                .doesntMatchTarget(Origin.class);
+                .doesNotMatchTarget(Origin.class);
     }
 
     @Test
@@ -101,8 +101,8 @@ public class DependencyTest {
     public void dependency_predicates_match() {
         assertThatDependency(Origin.class, Target.class)
                 .matches(Origin.class, Target.class)
-                .doesntMatch(Origin.class, Origin.class)
-                .doesntMatch(Target.class, Target.class);
+                .doesNotMatch(Origin.class, Origin.class)
+                .doesNotMatch(Target.class, Target.class);
     }
 
     @Test

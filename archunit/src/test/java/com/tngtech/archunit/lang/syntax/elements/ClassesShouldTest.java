@@ -389,8 +389,8 @@ public class ClassesShouldTest {
 
         assertThat(singleLineFailureReportOf(result))
                 .contains(String.format("classes should reside in a package '%s'", packageIdentifier))
-                .containsPattern(doesntResideInAPackagePatternFor(ArchConfiguration.class, packageIdentifier))
-                .containsPattern(doesntResideInAPackagePatternFor(GivenObjects.class, packageIdentifier))
+                .containsPattern(doesNotResideInAPackagePatternFor(ArchConfiguration.class, packageIdentifier))
+                .containsPattern(doesNotResideInAPackagePatternFor(GivenObjects.class, packageIdentifier))
                 .doesNotContain(String.format("%s", ArchRule.class.getSimpleName()))
                 .doesNotContain(String.format("%s", ArchCondition.class.getSimpleName()));
     }
@@ -420,7 +420,7 @@ public class ClassesShouldTest {
         assertThat(singleLineFailureReportOf(result))
                 .contains(String.format("classes should reside in any package ['%s']",
                         Joiner.on("', '").join(packageIdentifiers)))
-                .containsPattern(doesntResideInAnyPackagePatternFor(GivenObjects.class, packageIdentifiers))
+                .containsPattern(doesNotResideInAnyPackagePatternFor(GivenObjects.class, packageIdentifiers))
                 .doesNotContain(String.format("%s", ArchRule.class.getSimpleName()))
                 .doesNotContain(String.format("%s", ArchConfiguration.class.getSimpleName()));
     }
@@ -447,8 +447,8 @@ public class ClassesShouldTest {
 
         assertThat(singleLineFailureReportOf(result))
                 .contains(String.format("classes should reside outside of package '%s'", packageIdentifier))
-                .containsPattern(doesntResideOutsideOfPackagePatternFor(ArchRule.class, packageIdentifier))
-                .containsPattern(doesntResideOutsideOfPackagePatternFor(ArchCondition.class, packageIdentifier))
+                .containsPattern(doesNotResideOutsideOfPackagePatternFor(ArchRule.class, packageIdentifier))
+                .containsPattern(doesNotResideOutsideOfPackagePatternFor(ArchCondition.class, packageIdentifier))
                 .doesNotContain(String.format("%s", ArchConfiguration.class.getSimpleName()))
                 .doesNotContain(String.format("%s", GivenObjects.class.getSimpleName()));
     }
@@ -478,8 +478,8 @@ public class ClassesShouldTest {
         assertThat(singleLineFailureReportOf(result))
                 .contains(String.format("classes should reside outside of packages ['%s']",
                         Joiner.on("', '").join(packageIdentifiers)))
-                .containsPattern(doesntResideOutsideOfPackagesPatternFor(ArchRule.class, packageIdentifiers))
-                .containsPattern(doesntResideOutsideOfPackagesPatternFor(ArchCondition.class, packageIdentifiers))
+                .containsPattern(doesNotResideOutsideOfPackagesPatternFor(ArchRule.class, packageIdentifiers))
+                .containsPattern(doesNotResideOutsideOfPackagesPatternFor(ArchCondition.class, packageIdentifiers))
                 .doesNotContain(String.format("%s", GivenObjects.class.getSimpleName()));
     }
 
@@ -1400,22 +1400,22 @@ public class ClassesShouldTest {
         return String.format(".*%s.*", fullString.substring(1, fullString.length() - 1));
     }
 
-    private String doesntResideInAPackagePatternFor(Class<?> clazz, String packageIdentifier) {
+    private String doesNotResideInAPackagePatternFor(Class<?> clazz, String packageIdentifier) {
         return String.format("Class <%s> does not reside in a package '%s' in %s",
                 quote(clazz.getName()), quote(packageIdentifier), locationPattern(clazz));
     }
 
-    private String doesntResideOutsideOfPackagePatternFor(Class<?> clazz, String packageIdentifier) {
+    private String doesNotResideOutsideOfPackagePatternFor(Class<?> clazz, String packageIdentifier) {
         return String.format("Class <%s> does not reside outside of package '%s' in %s",
                 quote(clazz.getName()), quote(packageIdentifier), locationPattern(clazz));
     }
 
-    private String doesntResideInAnyPackagePatternFor(Class<?> clazz, String[] packageIdentifiers) {
+    private String doesNotResideInAnyPackagePatternFor(Class<?> clazz, String[] packageIdentifiers) {
         return String.format("Class <%s> does not reside in any package \\['%s'\\] in %s",
                 quote(clazz.getName()), quote(Joiner.on("', '").join(packageIdentifiers)), locationPattern(clazz));
     }
 
-    private String doesntResideOutsideOfPackagesPatternFor(Class<?> clazz, String[] packageIdentifiers) {
+    private String doesNotResideOutsideOfPackagesPatternFor(Class<?> clazz, String[] packageIdentifiers) {
         return String.format("Class <%s> does not reside outside of packages \\['%s'\\] in %s",
                 quote(clazz.getName()), quote(Joiner.on("', '").join(packageIdentifiers)), locationPattern(clazz));
     }

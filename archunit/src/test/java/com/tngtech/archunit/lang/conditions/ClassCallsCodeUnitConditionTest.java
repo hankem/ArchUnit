@@ -36,7 +36,7 @@ public class ClassCallsCodeUnitConditionTest {
     }
 
     @Test
-    public void call_without_argument_doesnt_match() {
+    public void call_without_argument_does_not_match() {
         ConditionEvents events = checkCondition(callMethodWhere(
                 target(rawParameterTypes(new Class[0]))
                         .and(target(name(TargetClass.appendStringMethod))
@@ -46,7 +46,7 @@ public class ClassCallsCodeUnitConditionTest {
     }
 
     @Test
-    public void call_with_wrong_method_name_doesnt_match() {
+    public void call_with_wrong_method_name_does_not_match() {
         ConditionEvents events = checkCondition(
                 callMethodWhere(target(name("wrong"))
                         .and(target(rawParameterTypes(TargetClass.appendStringParams)))

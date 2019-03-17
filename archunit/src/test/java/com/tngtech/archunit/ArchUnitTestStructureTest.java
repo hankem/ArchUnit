@@ -26,7 +26,7 @@ public class ArchUnitTestStructureTest {
     }
 
     @Test
-    public void ImportTestUtils_doesnt_access_TestUtils() {
+    public void ImportTestUtils_does_not_access_TestUtils() {
         noClasses().that().haveNameMatching(ImportTestUtils.class.getName() + ".*")
                 .should().accessClassesThat().haveNameMatching(TestUtils.class.getName() + ".*")
                 .because("we wan't one central TestUtils for all tests")

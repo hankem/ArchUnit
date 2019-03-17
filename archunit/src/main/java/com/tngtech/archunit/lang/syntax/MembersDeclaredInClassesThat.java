@@ -27,7 +27,6 @@ import com.tngtech.archunit.lang.syntax.elements.ClassesThat;
 import com.tngtech.archunit.lang.syntax.elements.GivenMembersConjunction;
 
 import static com.tngtech.archunit.base.DescribedPredicate.doNot;
-import static com.tngtech.archunit.base.DescribedPredicate.dont;
 import static com.tngtech.archunit.base.DescribedPredicate.not;
 import static com.tngtech.archunit.core.domain.JavaClass.Predicates.INTERFACES;
 import static com.tngtech.archunit.core.domain.JavaClass.Predicates.assignableFrom;
@@ -55,11 +54,6 @@ class MembersDeclaredInClassesThat<MEMBER extends JavaMember, CONJUNCTION extend
     }
 
     @Override
-    public CONJUNCTION dontHaveFullyQualifiedName(String name) {
-        return givenWith(SyntaxPredicates.dontHaveFullyQualifiedName(name));
-    }
-
-    @Override
     public CONJUNCTION doNotHaveFullyQualifiedName(String name) {
         return givenWith(SyntaxPredicates.doNotHaveFullyQualifiedName(name));
     }
@@ -67,11 +61,6 @@ class MembersDeclaredInClassesThat<MEMBER extends JavaMember, CONJUNCTION extend
     @Override
     public CONJUNCTION haveSimpleName(String name) {
         return givenWith(SyntaxPredicates.haveSimpleName(name));
-    }
-
-    @Override
-    public CONJUNCTION dontHaveSimpleName(String name) {
-        return givenWith(SyntaxPredicates.dontHaveSimpleName(name));
     }
 
     @Override
@@ -185,11 +174,6 @@ class MembersDeclaredInClassesThat<MEMBER extends JavaMember, CONJUNCTION extend
     }
 
     @Override
-    public CONJUNCTION dontHaveModifier(JavaModifier modifier) {
-        return givenWith(SyntaxPredicates.dontHaveModifier(modifier));
-    }
-
-    @Override
     public CONJUNCTION doNotHaveModifier(JavaModifier modifier) {
         return givenWith(SyntaxPredicates.doNotHaveModifier(modifier));
     }
@@ -260,11 +244,6 @@ class MembersDeclaredInClassesThat<MEMBER extends JavaMember, CONJUNCTION extend
     }
 
     @Override
-    public CONJUNCTION dontImplement(Class<?> type) {
-        return givenWith(dont(JavaClass.Predicates.implement(type)));
-    }
-
-    @Override
     public CONJUNCTION doNotImplement(Class<?> type) {
         return givenWith(doNot(JavaClass.Predicates.implement(type)));
     }
@@ -275,11 +254,6 @@ class MembersDeclaredInClassesThat<MEMBER extends JavaMember, CONJUNCTION extend
     }
 
     @Override
-    public CONJUNCTION dontImplement(String typeName) {
-        return givenWith(dont(JavaClass.Predicates.implement(typeName)));
-    }
-
-    @Override
     public CONJUNCTION doNotImplement(String typeName) {
         return givenWith(doNot(JavaClass.Predicates.implement(typeName)));
     }
@@ -287,11 +261,6 @@ class MembersDeclaredInClassesThat<MEMBER extends JavaMember, CONJUNCTION extend
     @Override
     public CONJUNCTION implement(DescribedPredicate<? super JavaClass> predicate) {
         return givenWith(JavaClass.Predicates.implement(predicate));
-    }
-
-    @Override
-    public CONJUNCTION dontImplement(DescribedPredicate<? super JavaClass> predicate) {
-        return givenWith(dont(JavaClass.Predicates.implement(predicate)));
     }
 
     @Override

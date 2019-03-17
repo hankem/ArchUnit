@@ -82,7 +82,7 @@ public class ClassCacheTest {
     }
 
     @Test
-    public void doesnt_reuse_loaded_classes_by_locations_if_cacheMode_is_PER_CLASS() {
+    public void does_not_reuse_loaded_classes_by_locations_if_cacheMode_is_PER_CLASS() {
         cache.getClassesToAnalyzeFor(TestClass.class, analyzePackages("com.tngtech.archunit.junit").withCacheMode(PER_CLASS));
         assertThat(cache.cachedByLocations.asMap()).as("Classes cached by location").isEmpty();
 
@@ -149,7 +149,7 @@ public class ClassCacheTest {
     @Test
     public void non_existing_packages_are_ignored() {
         JavaClasses first = cache.getClassesToAnalyzeFor(TestClass.class, new TestAnalysisRequest()
-                .withPackages("something.that.doesnt.exist")
+                .withPackages("something.that.does.not.exist")
                 .withPackagesRoots(Rule.class));
         JavaClasses second = cache.getClassesToAnalyzeFor(TestClass.class,
                 analyzePackagesOf(Rule.class));

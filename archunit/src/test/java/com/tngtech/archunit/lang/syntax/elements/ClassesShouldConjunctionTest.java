@@ -50,8 +50,8 @@ public class ClassesShouldConjunctionTest {
                         RightOne.class.getName(), RightTwo.class.getName()));
         assertThat(report.getDetails()).containsOnly(
                 String.format("%s and %s",
-                        doesntHaveFqnMessage(Wrong.class, RightOne.class),
-                        doesntHaveFqnMessage(Wrong.class, RightTwo.class)));
+                        doesNotHaveFqnMessage(Wrong.class, RightOne.class),
+                        doesNotHaveFqnMessage(Wrong.class, RightTwo.class)));
     }
 
     @DataProvider
@@ -104,13 +104,13 @@ public class ClassesShouldConjunctionTest {
                         "classes should have fully qualified name '%s' and should have fully qualified name '%s'",
                         RightOne.class.getName(), RightTwo.class.getName()));
         assertThat(report.getDetails()).containsOnly(
-                doesntHaveFqnMessage(RightTwo.class, RightOne.class),
-                doesntHaveFqnMessage(RightOne.class, RightTwo.class),
-                doesntHaveFqnMessage(Wrong.class, RightOne.class),
-                doesntHaveFqnMessage(Wrong.class, RightTwo.class));
+                doesNotHaveFqnMessage(RightTwo.class, RightOne.class),
+                doesNotHaveFqnMessage(RightOne.class, RightTwo.class),
+                doesNotHaveFqnMessage(Wrong.class, RightOne.class),
+                doesNotHaveFqnMessage(Wrong.class, RightTwo.class));
     }
 
-    private String doesntHaveFqnMessage(Class<?> clazz, Class<?> expectedFqn) {
+    private String doesNotHaveFqnMessage(Class<?> clazz, Class<?> expectedFqn) {
         return String.format("Class <%s> does not have fully qualified name '%s' in (%s.java:0)",
                 clazz.getName(), expectedFqn.getName(), locationOf(clazz).getSimpleName());
     }
