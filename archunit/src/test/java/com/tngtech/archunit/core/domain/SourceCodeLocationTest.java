@@ -7,11 +7,10 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static com.tngtech.archunit.core.domain.Formatters.formatLocation;
 import static com.tngtech.archunit.core.domain.TestUtils.importClassWithContext;
 import static com.tngtech.archunit.testutil.Assertions.assertThat;
 
-public class FormattersTest {
+public class SourceCodeLocationTest {
     @Rule
     public final ArchConfigurationRule configuration = new ArchConfigurationRule();
 
@@ -26,12 +25,12 @@ public class FormattersTest {
         JavaClass classWithSource = importClassWithContext(Object.class);
 
         assertThat(classWithSource.getSource()).as("source").isPresent();
-        assertThat(formatLocation(classWithSource, 7)).isEqualTo("(Object.java:7)");
+        assertThat(SourceCodeLocation.of(classWithSource, 7)).hasToString("(Object.java:7)");
 
         JavaClass classWithoutSource = getClassWithoutSource();
 
         assertThat(classWithoutSource.getSource()).as("source").isAbsent();
-        assertThat(formatLocation(classWithoutSource, 7)).isEqualTo(String.format("(%s.java:7)", classWithoutSource.getSimpleName()));
+        assertThat(SourceCodeLocation.of(classWithoutSource, 7)).hasToString(String.format("(%s.java:7)", classWithoutSource.getSimpleName()));
     }
 
     private JavaClass getClassWithoutSource() {

@@ -26,8 +26,6 @@ import com.tngtech.archunit.core.domain.properties.HasName;
 import static com.tngtech.archunit.PublicAPI.Usage.ACCESS;
 
 public final class Formatters {
-    private static final String LOCATION_TEMPLATE = "(%s:%d)";
-
     private Formatters() {
     }
 
@@ -120,20 +118,5 @@ public final class Formatters {
     //       so we mimic this behavior
     private static boolean isAnonymousRest(String lastPart) {
         return Ints.tryParse(lastPart) != null;
-    }
-
-    /**
-     * @param clazz      Class determining the location
-     * @param lineNumber Line number of the location
-     * @return Arguments formatted as "(${clazz.getSimpleName()}.java:${lineNumber})". This format is (at least
-     * by IntelliJ Idea) recognized as location, if it's the end of a failure line, thus enabling IDE support
-     * to jump to a violation.
-     * @deprecated use {@link SourceCodeLocation}
-     * @see SourceCodeLocation
-     */
-    @Deprecated
-    @PublicAPI(usage = ACCESS)
-    public static String formatLocation(JavaClass clazz, int lineNumber) {
-        return SourceCodeLocation.of(clazz, lineNumber).toString();
     }
 }
