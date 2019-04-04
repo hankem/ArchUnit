@@ -68,16 +68,6 @@ public abstract class JavaCodeUnit extends JavaMember implements HasParameterTyp
         return fullName;
     }
 
-    /**
-     * @deprecated Use {@link #getRawParameterTypes()} instead
-     */
-    @Override
-    @Deprecated
-    @PublicAPI(usage = ACCESS)
-    public JavaClassList getParameters() {
-        return getRawParameterTypes();
-    }
-
     @Override
     @PublicAPI(usage = ACCESS)
     public JavaClassList getRawParameterTypes() {
@@ -94,16 +84,6 @@ public abstract class JavaCodeUnit extends JavaMember implements HasParameterTyp
     @PublicAPI(usage = ACCESS)
     public JavaClassList getExceptionTypes() {
         return getThrowsClause().getTypes();
-    }
-
-    /**
-     * @deprecated Use {@link #getRawReturnType()} instead.
-     */
-    @Override
-    @Deprecated
-    @PublicAPI(usage = ACCESS)
-    public JavaClass getReturnType() {
-        return getRawReturnType();
     }
 
     @Override
@@ -184,19 +164,6 @@ public abstract class JavaCodeUnit extends JavaMember implements HasParameterTyp
     public static final class Functions {
         private Functions() {
         }
-
-        /**
-         * @deprecated Use {@link HasReturnType.Functions#GET_RAW_RETURN_TYPE} instead
-         */
-        @Deprecated
-        @PublicAPI(usage = ACCESS)
-        public static final ChainableFunction<JavaCodeUnit, JavaClass> GET_RETURN_TYPE =
-                new ChainableFunction<JavaCodeUnit, JavaClass>() {
-                    @Override
-                    public JavaClass apply(JavaCodeUnit input) {
-                        return input.getRawReturnType();
-                    }
-                };
 
         public static final class Get {
             private Get() {

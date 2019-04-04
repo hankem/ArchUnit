@@ -6,6 +6,7 @@ import java.util.List;
 import com.tngtech.archunit.base.DescribedPredicate;
 import com.tngtech.archunit.core.domain.JavaAnnotation;
 import com.tngtech.archunit.core.domain.JavaClass;
+import com.tngtech.archunit.core.domain.JavaCodeUnit;
 import com.tngtech.archunit.core.domain.JavaConstructor;
 import com.tngtech.archunit.core.domain.JavaMember;
 import com.tngtech.archunit.core.domain.JavaMethod;
@@ -45,6 +46,8 @@ public class PublicAPIRules {
                     .and().areNotAssignableTo(Annotation.class)
                     .and(are(not(enclosedInANonPublicClass())))
                     .and().resideOutsideOfPackage(THIRDPARTY_PACKAGE_IDENTIFIER)
+                    // FIXME: Remove this line when PublicAPIRules.publicAPI() accounts for inner classes
+                    .and().doNotHaveFullyQualifiedName(JavaCodeUnit.Functions.class.getName())
 
                     .should().notBePublic()
 
@@ -216,6 +219,7 @@ public class PublicAPIRules {
                         return true;
                     }
                 }
+                // FIXME check inner classes, too
                 return false;
             }
         };
