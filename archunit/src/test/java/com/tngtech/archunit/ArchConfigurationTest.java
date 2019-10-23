@@ -53,7 +53,7 @@ public class ArchConfigurationTest {
 
     @Test
     public void empty_property_file() {
-        writeProperties(Collections.<String, String>emptyMap());
+        writeProperties();
 
         assertDefault(testConfiguration(PROPERTIES_FILE_NAME));
     }
@@ -249,18 +249,10 @@ public class ArchConfigurationTest {
 
     private void writeProperties(Object... props) {
         checkArgument(props.length % 2 == 0, "There are more keys than values inside of %s", Arrays.toString(props));
-        ImmutableMap.Builder<String, Object> map = ImmutableMap.builder();
+        Properties save = new Properties();
         for (int i = 0; i < props.length; i += 2) {
             checkArgument(props[i] instanceof String, "Array entry %s is supposed to be a property name, but is no string", props[i]);
-            map.put((String) props[i], props[i + 1]);
-        }
-        writeProperties(map.build());
-    }
-
-    private void writeProperties(Map<String, ?> props) {
-        Properties save = new Properties();
-        for (Map.Entry<String, ?> entry : props.entrySet()) {
-            save.setProperty(entry.getKey(), "" + entry.getValue());
+            save.setProperty((String) props[i], "" + props[i + 1]);
         }
         try (FileOutputStream outputStream = new FileOutputStream(testPropsFile)) {
             save.store(outputStream, "");
