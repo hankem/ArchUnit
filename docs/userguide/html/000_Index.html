@@ -2074,12 +2074,11 @@ freeze.store.default.allowStoreUpdate=false</code></pre>
 </div>
 <div class="paragraph">
 <p>This can help in CI environments to prevent a misconfiguration.
-For example, if a CI job should never need to update the violation store, it can be prevented.
-Also a misconfiguration of the store path in a CI environment can be prevented by forbidding the creation of a new violation store.</p>
+For example, a CI build should probably never update the violation store nor create a new one.</p>
 </div>
 <div class="paragraph">
-<p>As mentioned in <a href="#_overriding_configuration">Overriding configuration</a>, these these properties can be passed as system properties as needed.
-For example to allow the creation of the violation store in a specific environment, it is possible to pass the system property via</p>
+<p>As mentioned in <a href="#_overriding_configuration">Overriding configuration</a>, these properties can be passed as system properties as needed.
+For example, using the following system property allows to create violation stores in a specific environment:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2397,11 +2396,12 @@ This section will outline some global configuration options.</p>
 <div class="sect2">
 <h3 id="_overriding_configuration"><a class="anchor" href="#_overriding_configuration"></a>10.1. Overriding configuration</h3>
 <div class="paragraph">
-<p>ArchUnit will use exactly the <code>archunit.properties</code> file, that is returned by the context
-<code>ClassLoader</code> from the classpath root, via the standard Java resource loading mechanism.</p>
+<p>ArchUnit will use the <code>archunit.properties</code> file returned by the context <code>ClassLoader</code> from the classpath root
+via the standard Java resource loading mechanism.</p>
 </div>
 <div class="paragraph">
-<p>It is possible to override any property from <code>archunit.properties</code>, by passing a system property:</p>
+<p>It is possible to override any property from <code>archunit.properties</code>
+by passing a corresponding system property to the respective JVM process executing ArchUnit:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2409,7 +2409,7 @@ This section will outline some global configuration options.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>E.g. to override the property <code>resolveMissingDependenciesFromClassPath</code> described in the next section, it would be possible to pass the following to the respective JVM process executing ArchUnit:</p>
+<p>For example, the property <code>resolveMissingDependenciesFromClassPath</code> can be overridden with:</p>
 </div>
 <div class="listingblock">
 <div class="content">

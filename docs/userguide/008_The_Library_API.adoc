@@ -333,11 +333,10 @@ freeze.store.default.allowStoreUpdate=false
 ----
 
 This can help in CI environments to prevent a misconfiguration.
-For example, if a CI job should never need to update the violation store, it can be prevented.
-Also a misconfiguration of the store path in a CI environment can be prevented by forbidding the creation of a new violation store.
+For example, a CI build should probably never update the violation store nor create a new one.
 
-As mentioned in <<Overriding configuration>>, these these properties can be passed as system properties as needed.
-For example to allow the creation of the violation store in a specific environment, it is possible to pass the system property via
+As mentioned in <<Overriding configuration>>, these properties can be passed as system properties as needed.
+For example, using the following system property allows to create violation stores in a specific environment:
 
 [source,options="nowrap"]
 ----

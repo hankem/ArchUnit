@@ -6,17 +6,18 @@ This section will outline some global configuration options.
 
 === Overriding configuration
 
-ArchUnit will use exactly the `archunit.properties` file, that is returned by the context
-`ClassLoader` from the classpath root, via the standard Java resource loading mechanism.
+ArchUnit will use the `archunit.properties` file returned by the context `ClassLoader` from the classpath root
+via the standard Java resource loading mechanism.
 
-It is possible to override any property from `archunit.properties`, by passing a system property:
+It is possible to override any property from `archunit.properties`
+by passing a corresponding system property to the respective JVM process executing ArchUnit:
 
 [source,options="nowrap"]
 ----
 -Darchunit.propertyName=propertyValue
 ----
 
-E.g. to override the property `resolveMissingDependenciesFromClassPath` described in the next section, it would be possible to pass the following to the respective JVM process executing ArchUnit:
+For example, the property `resolveMissingDependenciesFromClassPath` can be overridden with:
 
 [source,options="nowrap"]
 ----
