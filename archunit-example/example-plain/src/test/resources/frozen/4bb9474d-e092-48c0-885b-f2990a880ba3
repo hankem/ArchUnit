@@ -1,0 +1,9 @@
+Cycle detected: slice1 of membercycle -> slice2 of membercycle -> slice3 of membercycle -> slice4 of membercycle -> slice1 of membercycle\
+Dependencies of slice1 of membercycle\
+Field <com.tngtech.archunit.example.cycles.membercycle.slice1.SliceOneWithFieldTypeInSliceTwo.classInSliceTwo> has type <com.tngtech.archunit.example.cycles.membercycle.slice2.SliceTwoWithMethodParameterTypeInSliceThree> in (SliceOneWithFieldTypeInSliceTwo.java:0)\
+Dependencies of slice2 of membercycle\
+Method <com.tngtech.archunit.example.cycles.membercycle.slice2.SliceTwoWithMethodParameterTypeInSliceThree.methodWithParameterInSliceThree(com.tngtech.archunit.example.cycles.membercycle.slice3.SliceThreeWithMethodReturnTypeInSliceFour)> has parameter of type <com.tngtech.archunit.example.cycles.membercycle.slice3.SliceThreeWithMethodReturnTypeInSliceFour> in (SliceTwoWithMethodParameterTypeInSliceThree.java:0)\
+Dependencies of slice3 of membercycle\
+Method <com.tngtech.archunit.example.cycles.membercycle.slice3.SliceThreeWithMethodReturnTypeInSliceFour.methodWithReturnTypeInSliceFour()> has return type <com.tngtech.archunit.example.cycles.membercycle.slice4.SliceFourWithConstructorParameterInSliceOne> in (SliceThreeWithMethodReturnTypeInSliceFour.java:0)\
+Dependencies of slice4 of membercycle\
+Constructor <com.tngtech.archunit.example.cycles.membercycle.slice4.SliceFourWithConstructorParameterInSliceOne.<init>(com.tngtech.archunit.example.cycles.membercycle.slice1.SliceOneWithFieldTypeInSliceTwo)> has parameter of type <com.tngtech.archunit.example.cycles.membercycle.slice1.SliceOneWithFieldTypeInSliceTwo> in (SliceFourWithConstructorParameterInSliceOne.java:0)

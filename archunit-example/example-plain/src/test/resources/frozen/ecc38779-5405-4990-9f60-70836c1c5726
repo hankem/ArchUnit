@@ -1,0 +1,12 @@
+Cycle detected: slice1 of inheritancecycle -> slice2 of inheritancecycle -> slice1 of inheritancecycle\
+Dependencies of slice1 of inheritancecycle\
+Class <com.tngtech.archunit.example.cycles.inheritancecycle.slice1.ClassThatInheritsFromSliceTwo> extends class <com.tngtech.archunit.example.cycles.inheritancecycle.slice2.ClassThatInheritsFromSliceOne> in (ClassThatInheritsFromSliceTwo.java:0)\
+Constructor <com.tngtech.archunit.example.cycles.inheritancecycle.slice1.ClassThatInheritsFromSliceTwo.<init>()> calls constructor <com.tngtech.archunit.example.cycles.inheritancecycle.slice2.ClassThatInheritsFromSliceOne.<init>()> in (ClassThatInheritsFromSliceTwo.java:5)\
+Dependencies of slice2 of inheritancecycle\
+Class <com.tngtech.archunit.example.cycles.inheritancecycle.slice2.ClassThatInheritsFromSliceOne> extends class <com.tngtech.archunit.example.cycles.inheritancecycle.slice1.ClassThatIsInheritedFromSliceTwo> in (ClassThatInheritsFromSliceOne.java:0)\
+Constructor <com.tngtech.archunit.example.cycles.inheritancecycle.slice2.ClassThatInheritsFromSliceOne.<init>()> calls constructor <com.tngtech.archunit.example.cycles.inheritancecycle.slice1.ClassThatIsInheritedFromSliceTwo.<init>()> in (ClassThatInheritsFromSliceOne.java:5)
+Cycle detected: slice1 of inheritancecycle -> slice3 of inheritancecycle -> slice1 of inheritancecycle\
+Dependencies of slice1 of inheritancecycle\
+Constructor <com.tngtech.archunit.example.cycles.inheritancecycle.slice1.ClassThatCallSliceThree.<init>()> calls constructor <com.tngtech.archunit.example.cycles.inheritancecycle.slice3.ClassThatImplementsInterfaceFromSliceOne.<init>()> in (ClassThatCallSliceThree.java:7)\
+Dependencies of slice3 of inheritancecycle\
+Class <com.tngtech.archunit.example.cycles.inheritancecycle.slice3.ClassThatImplementsInterfaceFromSliceOne> implements interface <com.tngtech.archunit.example.cycles.inheritancecycle.slice1.InterfaceInSliceOne> in (ClassThatImplementsInterfaceFromSliceOne.java:0)

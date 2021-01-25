@@ -1,0 +1,7 @@
+Cycle detected: slice1 of fieldaccesscycle -> slice2 of fieldaccesscycle -> slice1 of fieldaccesscycle\
+Dependencies of slice1 of fieldaccesscycle\
+Field <com.tngtech.archunit.example.cycles.fieldaccesscycle.slice1.SliceOneAccessingFieldInSliceTwo.classInSliceTwo> has type <com.tngtech.archunit.example.cycles.fieldaccesscycle.slice2.SliceTwoAccessingFieldInSliceOne> in (SliceOneAccessingFieldInSliceTwo.java:0)\
+Method <com.tngtech.archunit.example.cycles.fieldaccesscycle.slice1.SliceOneAccessingFieldInSliceTwo.accessSliceTwo()> sets field <com.tngtech.archunit.example.cycles.fieldaccesscycle.slice2.SliceTwoAccessingFieldInSliceOne.accessedField> in (SliceOneAccessingFieldInSliceTwo.java:9)\
+Dependencies of slice2 of fieldaccesscycle\
+Field <com.tngtech.archunit.example.cycles.fieldaccesscycle.slice2.SliceTwoAccessingFieldInSliceOne.classInSliceOne> has type <com.tngtech.archunit.example.cycles.fieldaccesscycle.slice1.ClassInSliceOneWithAccessedField> in (SliceTwoAccessingFieldInSliceOne.java:0)\
+Method <com.tngtech.archunit.example.cycles.fieldaccesscycle.slice2.SliceTwoAccessingFieldInSliceOne.accessSliceOne()> sets field <com.tngtech.archunit.example.cycles.fieldaccesscycle.slice1.ClassInSliceOneWithAccessedField.accessedField> in (SliceTwoAccessingFieldInSliceOne.java:10)

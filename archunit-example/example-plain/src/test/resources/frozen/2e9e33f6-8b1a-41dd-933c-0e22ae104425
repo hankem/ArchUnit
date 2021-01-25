@@ -1,0 +1,10 @@
+Cycle detected: slice1 of simplecycle -> slice2 of simplecycle -> slice3 of simplecycle -> slice1 of simplecycle\
+Dependencies of slice1 of simplecycle\
+Field <com.tngtech.archunit.example.cycles.simplecycle.slice1.SliceOneCallingMethodInSliceTwo.classInSliceTwo> has type <com.tngtech.archunit.example.cycles.simplecycle.slice2.SliceTwoCallingMethodOfSliceThree> in (SliceOneCallingMethodInSliceTwo.java:0)\
+Method <com.tngtech.archunit.example.cycles.simplecycle.slice1.SliceOneCallingMethodInSliceTwo.callSliceTwo()> calls method <com.tngtech.archunit.example.cycles.simplecycle.slice2.SliceTwoCallingMethodOfSliceThree.doSomethingInSliceTwo()> in (SliceOneCallingMethodInSliceTwo.java:9)\
+Dependencies of slice2 of simplecycle\
+Field <com.tngtech.archunit.example.cycles.simplecycle.slice2.SliceTwoCallingMethodOfSliceThree.classInSliceThree> has type <com.tngtech.archunit.example.cycles.simplecycle.slice3.SliceThreeCallingMethodOfSliceOne> in (SliceTwoCallingMethodOfSliceThree.java:0)\
+Method <com.tngtech.archunit.example.cycles.simplecycle.slice2.SliceTwoCallingMethodOfSliceThree.callSliceThree()> calls method <com.tngtech.archunit.example.cycles.simplecycle.slice3.SliceThreeCallingMethodOfSliceOne.doSomethingInSliceThree()> in (SliceTwoCallingMethodOfSliceThree.java:9)\
+Dependencies of slice3 of simplecycle\
+Field <com.tngtech.archunit.example.cycles.simplecycle.slice3.SliceThreeCallingMethodOfSliceOne.someClassInSliceOne> has type <com.tngtech.archunit.example.cycles.simplecycle.slice1.SomeClassBeingCalledInSliceOne> in (SliceThreeCallingMethodOfSliceOne.java:0)\
+Method <com.tngtech.archunit.example.cycles.simplecycle.slice3.SliceThreeCallingMethodOfSliceOne.callSliceOne()> calls method <com.tngtech.archunit.example.cycles.simplecycle.slice1.SomeClassBeingCalledInSliceOne.doSomethingInSliceOne()> in (SliceThreeCallingMethodOfSliceOne.java:9)

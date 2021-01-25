@@ -1,0 +1,10 @@
+Cycle detected: Complex-Cycle[One] -> Complex-Cycle[Two] -> Complex-Cycle[One]\
+Dependencies of Complex-Cycle[One]\
+Field <com.tngtech.archunit.example.cycles.complexcycles.slice1.ClassOfMinimalCycleCallingSliceTwo.classInSliceTwo> has type <com.tngtech.archunit.example.cycles.complexcycles.slice2.ClassOfMinimalCycleCallingSliceOne> in (ClassOfMinimalCycleCallingSliceTwo.java:0)\
+Method <com.tngtech.archunit.example.cycles.complexcycles.slice1.ClassOfMinimalCycleCallingSliceTwo.callSliceTwo()> calls method <com.tngtech.archunit.example.cycles.complexcycles.slice2.ClassOfMinimalCycleCallingSliceOne.callSliceOne()> in (ClassOfMinimalCycleCallingSliceTwo.java:9)\
+Method <com.tngtech.archunit.example.cycles.complexcycles.slice1.SliceOneCallingConstructorInSliceTwoAndMethodInSliceThree.callSliceTwo()> calls constructor <com.tngtech.archunit.example.cycles.complexcycles.slice2.InstantiatedClassInSliceTwo.<init>()> in (SliceOneCallingConstructorInSliceTwoAndMethodInSliceThree.java:10)\
+Dependencies of Complex-Cycle[Two]\
+Class <com.tngtech.archunit.example.cycles.complexcycles.slice2.SliceTwoInheritingFromSliceOne> extends class <com.tngtech.archunit.example.cycles.complexcycles.slice1.SliceOneCallingConstructorInSliceTwoAndMethodInSliceThree> in (SliceTwoInheritingFromSliceOne.java:0)\
+Field <com.tngtech.archunit.example.cycles.complexcycles.slice2.ClassOfMinimalCycleCallingSliceOne.classInSliceOne> has type <com.tngtech.archunit.example.cycles.complexcycles.slice1.ClassOfMinimalCycleCallingSliceTwo> in (ClassOfMinimalCycleCallingSliceOne.java:0)\
+Constructor <com.tngtech.archunit.example.cycles.complexcycles.slice2.SliceTwoInheritingFromSliceOne.<init>()> calls constructor <com.tngtech.archunit.example.cycles.complexcycles.slice1.SliceOneCallingConstructorInSliceTwoAndMethodInSliceThree.<init>()> in (SliceTwoInheritingFromSliceOne.java:5)\
+Method <com.tngtech.archunit.example.cycles.complexcycles.slice2.ClassOfMinimalCycleCallingSliceOne.callSliceOne()> calls method <com.tngtech.archunit.example.cycles.complexcycles.slice1.ClassOfMinimalCycleCallingSliceTwo.callSliceTwo()> in (ClassOfMinimalCycleCallingSliceOne.java:9)

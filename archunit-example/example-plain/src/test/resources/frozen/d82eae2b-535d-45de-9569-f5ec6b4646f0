@@ -1,0 +1,11 @@
+Cycle detected: administration -> report -> importer -> administration\
+Dependencies of administration\
+Field <com.tngtech.archunit.example.cycles.simplescenario.administration.AdministrationService.reportService> has type <com.tngtech.archunit.example.cycles.simplescenario.report.ReportService> in (AdministrationService.java:0)\
+Method <com.tngtech.archunit.example.cycles.simplescenario.administration.AdministrationService.saveNewInvoice(com.tngtech.archunit.example.cycles.simplescenario.administration.Invoice)> calls method <com.tngtech.archunit.example.cycles.simplescenario.report.ReportService.getReport(java.lang.String)> in (AdministrationService.java:12)\
+Method <com.tngtech.archunit.example.cycles.simplescenario.administration.AdministrationService.saveNewInvoice(com.tngtech.archunit.example.cycles.simplescenario.administration.Invoice)> calls method <com.tngtech.archunit.example.cycles.simplescenario.report.Report.isEmpty()> in (AdministrationService.java:13)\
+Dependencies of report\
+Field <com.tngtech.archunit.example.cycles.simplescenario.report.ReportService.importService> has type <com.tngtech.archunit.example.cycles.simplescenario.importer.ImportService> in (ReportService.java:0)\
+Method <com.tngtech.archunit.example.cycles.simplescenario.report.ReportService.getReport(java.lang.String)> calls method <com.tngtech.archunit.example.cycles.simplescenario.importer.ImportService.process(java.lang.String)> in (ReportService.java:10)\
+Dependencies of importer\
+Field <com.tngtech.archunit.example.cycles.simplescenario.importer.ImportService.administrationService> has type <com.tngtech.archunit.example.cycles.simplescenario.administration.AdministrationService> in (ImportService.java:0)\
+Method <com.tngtech.archunit.example.cycles.simplescenario.importer.ImportService.process(java.lang.String)> calls method <com.tngtech.archunit.example.cycles.simplescenario.administration.AdministrationService.createCustomerId(java.lang.String)> in (ImportService.java:11)

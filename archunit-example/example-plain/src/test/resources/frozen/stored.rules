@@ -1,4 +1,13 @@
 #
-#Sun Jun 09 00:30:33 ICT 2019
-no\ classes\ should\ depend\ on\ classes\ that\ reside\ in\ a\ package\ '..service..'=a81a2b54-5a18-4145-b544-7a580aba0425
-no\ classes\ should\ depend\ on\ classes\ that\ are\ assignable\ to\ javax.persistence.EntityManager=e77ec262-4d5c-4a7b-b41f-362a71e5a1d8
+#Sun Jan 24 16:03:37 PST 2021
+no\ classes\ should\ depend\ on\ classes\ that\ reside\ in\ a\ package\ '..service..'=473b09a1-dc54-4b6e-b607-0306fae1f8a9
+slices\ matching\ '..simplescenario.(*)..'\ should\ be\ free\ of\ cycles=d82eae2b-535d-45de-9569-f5ec6b4646f0
+slices\ matching\ '..(complexcycles).(*)..'\ should\ be\ free\ of\ cycles=e838b91d-effe-43d2-9b8e-dacdaae59429
+slices\ matching\ '..(inheritancecycle).(*)..'\ should\ be\ free\ of\ cycles=ecc38779-5405-4990-9f60-70836c1c5726
+slices\ assigned\ from\ complex\ slice\ one\ or\ two\ should\ be\ free\ of\ cycles=e508e246-d131-466d-a77a-9f49df44beac
+no\ classes\ should\ depend\ on\ classes\ that\ are\ assignable\ to\ javax.persistence.EntityManager=2dfd7a74-3ebb-4cba-9a50-ff9508cd12e0
+slices\ matching\ '..(fieldaccesscycle).(*)..'\ should\ be\ free\ of\ cycles=1e4a9ac1-f136-4450-98d2-8fd72c6fc35b
+Slices\ of\ complex\ scenario\ ignoring\ some\ violations\ should\ be\ free\ of\ cycles=178e56e2-cb59-4080-af09-1d97e5fc2aa6
+slices\ matching\ '..(constructorcycle).(*)..'\ should\ be\ free\ of\ cycles=7f9e3615-beb8-4432-b496-6c5749424503
+slices\ matching\ '..(simplecycle).(*)..'\ should\ be\ free\ of\ cycles=2e9e33f6-8b1a-41dd-933c-0e22ae104425
+slices\ matching\ '..(membercycle).(*)..'\ should\ be\ free\ of\ cycles=4bb9474d-e092-48c0-885b-f2990a880ba3

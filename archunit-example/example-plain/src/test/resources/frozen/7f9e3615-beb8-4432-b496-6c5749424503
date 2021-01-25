@@ -1,0 +1,5 @@
+Cycle detected: slice1 of constructorcycle -> slice2 of constructorcycle -> slice1 of constructorcycle\
+Dependencies of slice1 of constructorcycle\
+Method <com.tngtech.archunit.example.cycles.constructorcycle.slice1.SliceOneCallingConstructorInSliceTwo.callSliceTwo()> calls constructor <com.tngtech.archunit.example.cycles.constructorcycle.slice2.SliceTwoCallingConstructorInSliceOne.<init>()> in (SliceOneCallingConstructorInSliceTwo.java:7)\
+Dependencies of slice2 of constructorcycle\
+Method <com.tngtech.archunit.example.cycles.constructorcycle.slice2.SliceTwoCallingConstructorInSliceOne.callSliceOne()> calls constructor <com.tngtech.archunit.example.cycles.constructorcycle.slice1.SomeClassWithCalledConstructor.<init>()> in (SliceTwoCallingConstructorInSliceOne.java:7)
