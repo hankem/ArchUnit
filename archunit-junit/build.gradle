@@ -37,15 +37,15 @@ dependencies {
     archJunitApi project(path: ':archunit', configuration: 'shadow')
     dependency.addGuava { dependencyNotation, config -> implementation(dependencyNotation, config) }
 
-    testImplementation dependency.junit4
-    testImplementation dependency.junit_dataprovider
-    testImplementation dependency.mockito
-    testImplementation dependency.assertj
+    testImplementation libs.junit4
+    testImplementation libs.junit.dataprovider
+    testImplementation libs.mockito
+    testImplementation libs.assertj
     testImplementation project(path: ':archunit', configuration: 'tests')
 
     // This is a hack for running tests with IntelliJ instead of delegating to Gradle,
     // because for some reason this dependency cannot be resolved otherwise :-(
-    testRuntimeOnly dependency.asm
+    testRuntimeOnly libs.asm
 }
 
 shadowJar {
@@ -53,7 +53,7 @@ shadowJar {
 
     dependencies {
         exclude(project(':archunit'))
-        exclude(dependency(dependency.slf4j))
+        exclude(dependency("${libs.slf4j.get()}"))
     }
 }
 

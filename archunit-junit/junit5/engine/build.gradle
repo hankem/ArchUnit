@@ -14,10 +14,10 @@ dependencies {
     dependency.addGuava { dependencyNotation, config -> implementation(dependencyNotation, config) }
 
     testImplementation project(path: ':archunit', configuration: 'tests')
-    testImplementation dependency.assertj
-    testImplementation dependency.mockito
-    testImplementation dependency.mockito_junit5
-    testImplementation dependency.log4j_core
+    testImplementation libs.assertj
+    testImplementation libs.mockito
+    testImplementation libs.mockito.junit5
+    testImplementation libs.log4j.core
 }
 
 gradle.projectsEvaluated {
