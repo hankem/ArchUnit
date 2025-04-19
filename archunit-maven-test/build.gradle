@@ -126,10 +126,8 @@ def addMavenTest = { IntegrationTestConfig config ->
                                         .replace('#{javaVersion}', "${config.javaVersion}")
                                         .replace('#{additionalDependencies}', config.additionalDependencies ?: '')
                                         .replace('#{surefireExampleConfiguration}', config.surefireExampleConfiguration)
-                                        .replaceAll(/#\{(dependency|libs).([^}:]+):?([^}]*)}/) { all, catalog, dependencyReference, scope ->
-                                                def targetDependency = catalog == "libs" ?
-                                                        versionCatalog.findLibrary(dependencyReference).get().get() :
-                                                        dependency[dependencyReference]
+                                        .replaceAll(/#\{libs.([^}:]+):?([^}]*)}/) { all, dependencyReference, scope ->
+                                                def targetDependency = versionCatalog.findLibrary(dependencyReference).get().get()
                                                 def scopePart = scope ? "\n            <scope>${scope}</scope>" : ''
                                                 """
                                                 |        <dependency>
