@@ -35,5 +35,5 @@ guice = { group = "com.google.inject", name = "guice", version = "5.1.0" }
 # NOTE: The pure javaee-api dependencies are crippled, so to run any test we need to choose a full implementation provider
 geronimoEjb = {group = "org.apache.geronimo.specs", name = "geronimo-ejb_3.1_spec", version = "1.0.2" }
 geronimoJpa = { group = "org.apache.geronimo.specs", name = "geronimo-jpa_2.0_spec", version = "1.1" }
-jodaTime = { group = "joda-time", name = "joda-time", version = "2.12.7" }
+jodaTime = { group = "joda-time", name = "joda-time", version = "2.14.0" }
 joox = { group = "org.jooq", name = "joox-java-6", version = "1.6.0" }
