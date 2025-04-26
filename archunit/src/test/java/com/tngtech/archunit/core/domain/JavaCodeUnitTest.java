@@ -6,14 +6,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import com.google.common.collect.ImmutableList;
 import com.tngtech.archunit.core.importer.ClassFileImporter;
-import com.tngtech.java.junit.dataprovider.DataProvider;
-import com.tngtech.java.junit.dataprovider.DataProviderRunner;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.union;
@@ -24,10 +23,8 @@ import static com.tngtech.archunit.core.domain.properties.HasType.Functions.GET_
 import static com.tngtech.archunit.testutil.Assertions.assertThat;
 import static com.tngtech.archunit.testutil.Assertions.assertThatAnnotation;
 import static com.tngtech.archunit.testutil.Assertions.assertThatTypes;
-import static com.tngtech.java.junit.dataprovider.DataProviders.testForEach;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@RunWith(DataProviderRunner.class)
 public class JavaCodeUnitTest {
 
     @Test
@@ -80,10 +77,9 @@ public class JavaCodeUnitTest {
                         .build());
     }
 
-    @DataProvider
-    public static Object[][] code_units_with_parameters() {
+    static Stream<JavaCodeUnit> code_units_with_parameters() {
         JavaClass javaClass = new ClassFileImporter().importClass(ClassWithVariousCodeUnitParameters.class);
-        return testForEach(
+        return Stream.of(
                 javaClass.getConstructor(Object.class, String.class),
                 javaClass.getConstructor(List.class, Map.class),
                 javaClass.getMethod("method", Object.class, String.class),
@@ -91,9 +87,9 @@ public class JavaCodeUnitTest {
         );
     }
 
-    @Test
-    @UseDataProvider("code_units_with_parameters")
-    public void creates_parameters(JavaCodeUnit codeUnit) {
+    @ParameterizedTest
+    @MethodSource("code_units_with_parameters")
+    void creates_parameters(JavaCodeUnit codeUnit) {
         for (int i = 0; i < codeUnit.getParameters().size(); i++) {
             assertThat(codeUnit.getParameters().get(i).getRawType()).isEqualTo(codeUnit.getRawParameterTypes().get(i));
             assertThat(codeUnit.getParameters().get(i).getType()).isEqualTo(codeUnit.getParameterTypes().get(i));
@@ -169,8 +165,7 @@ public class JavaCodeUnitTest {
         }
     }
 
-    @DataProvider
-    public static Object[][] code_units_with_four_different_parameters() {
+    static Stream<JavaCodeUnit> code_units_with_four_different_parameters() {
         @SuppressWarnings("unused")
         class SomeClass<T> {
             SomeClass(List<String> first, T second, String third, int fourth) {
@@ -180,15 +175,15 @@ public class JavaCodeUnitTest {
             }
         }
         JavaClass javaClass = new ClassFileImporter().importClass(SomeClass.class);
-        return testForEach(
+        return Stream.of(
                 javaClass.getConstructor(List.class, Object.class, String.class, int.class),
                 javaClass.getMethod("method", List.class, Object.class, String.class, int.class)
         );
     }
 
-    @Test
-    @UseDataProvider("code_units_with_four_different_parameters")
-    public void adds_description_to_parameters_of_code_unit(JavaCodeUnit codeUnit) {
+    @ParameterizedTest
+    @MethodSource("code_units_with_four_different_parameters")
+    void adds_description_to_parameters_of_code_unit(JavaCodeUnit codeUnit) {
         List<JavaParameter> parameters = codeUnit.getParameters();
 
         assertThat(parameters.get(0).getDescription()).isEqualTo("Parameter <" + List.class.getName() + "<" + String.class.getName() + ">> of " + startWithLowercase(codeUnit.getDescription()));
@@ -197,9 +192,9 @@ public class JavaCodeUnitTest {
         assertThat(parameters.get(3).getDescription()).isEqualTo("Parameter <" + int.class.getName() + "> of " + startWithLowercase(codeUnit.getDescription()));
     }
 
-    @Test
-    @UseDataProvider("code_units_with_four_different_parameters")
-    public void adds_index_to_parameters_of_code_unit(JavaCodeUnit codeUnit) {
+    @ParameterizedTest
+    @MethodSource("code_units_with_four_different_parameters")
+    void adds_index_to_parameters_of_code_unit(JavaCodeUnit codeUnit) {
         List<JavaParameter> parameters = codeUnit.getParameters();
 
         assertThat(parameters.get(0).getIndex()).isEqualTo(0);
@@ -208,8 +203,7 @@ public class JavaCodeUnitTest {
         assertThat(parameters.get(3).getIndex()).isEqualTo(3);
     }
 
-    @DataProvider
-    public static Object[][] data_adds_owner_to_parameters_of_code_unit() {
+    static Stream<JavaCodeUnit> adds_owner_to_parameters_of_code_unit() {
         @SuppressWarnings("unused")
         class SomeClass {
             SomeClass(String param) {
@@ -219,14 +213,14 @@ public class JavaCodeUnitTest {
             }
         }
         JavaClass javaClass = new ClassFileImporter().importClass(SomeClass.class);
-        return testForEach(
+        return Stream.of(
                 javaClass.getConstructor(String.class),
                 javaClass.getMethod("method", String.class));
     }
 
-    @Test
-    @UseDataProvider
-    public void test_adds_owner_to_parameters_of_code_unit(JavaCodeUnit codeUnit) {
+    @ParameterizedTest
+    @MethodSource
+    void adds_owner_to_parameters_of_code_unit(JavaCodeUnit codeUnit) {
         for (JavaParameter parameter : codeUnit.getParameters()) {
             assertThat(parameter.getOwner()).isEqualTo(codeUnit);
         }

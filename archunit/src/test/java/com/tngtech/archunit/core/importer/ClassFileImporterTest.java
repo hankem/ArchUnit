@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -75,14 +76,14 @@ import com.tngtech.archunit.core.importer.testexamples.syntheticimport.ClassWith
 import com.tngtech.archunit.testutil.ArchConfigurationRule;
 import com.tngtech.archunit.testutil.LogTestRule;
 import com.tngtech.archunit.testutil.OutsideOfClassPathRule;
-import com.tngtech.java.junit.dataprovider.DataProvider;
-import com.tngtech.java.junit.dataprovider.DataProviderRunner;
-import com.tngtech.java.junit.dataprovider.UseDataProvider;
 import org.apache.logging.log4j.Level;
 import org.assertj.core.api.Condition;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 
@@ -109,13 +110,11 @@ import static com.tngtech.archunit.testutil.ReflectionTestUtils.method;
 import static com.tngtech.archunit.testutil.TestUtils.uriOf;
 import static com.tngtech.archunit.testutil.TestUtils.urlOf;
 import static com.tngtech.archunit.testutil.assertion.ExpectedConcreteType.ExpectedConcreteParameterizedType.parameterizedType;
-import static com.tngtech.java.junit.dataprovider.DataProviders.testForEach;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toSet;
 import static org.junit.Assume.assumeTrue;
 
-@RunWith(DataProviderRunner.class)
 public class ClassFileImporterTest {
     @Rule
     public final OutsideOfClassPathRule outsideOfClassPath = new OutsideOfClassPathRule();
@@ -188,13 +187,8 @@ public class ClassFileImporterTest {
                 .containsOnly(EnumToImport.FIRST.name(), EnumToImport.SECOND.name());
     }
 
-    @DataProvider
-    public static Object[][] nested_static_classes() {
-        return testForEach(ClassWithInnerClass.NestedStatic.class, ClassWithInnerClass.ImplicitlyNestedStatic.class);
-    }
-
-    @Test
-    @UseDataProvider("nested_static_classes")
+    @ParameterizedTest
+    @ValueSource(classes = {ClassWithInnerClass.NestedStatic.class, ClassWithInnerClass.ImplicitlyNestedStatic.class})
     public void imports_simple_static_nested_class(Class<?> nestedStaticClass) {
         JavaClasses classes = new ClassFileImporter().importUrl(getClass().getResource("testexamples/innerclassimport"));
 
@@ -396,15 +390,10 @@ public class ClassFileImporterTest {
         assertThatTypes(javaPackage.getParent().get().getClasses()).contain(getClass());
     }
 
-    @DataProvider
-    public static Object[][] array_types() {
-        return testForEach(ClassAccessingOneDimensionalArray.class, ClassAccessingTwoDimensionalArray.class);
-    }
-
     // we want to diverge from the Reflection API in this place, because it is way more useful for dependency checks,
     // if com.some.SomeArray[].getPackageName() reports 'com.some' instead of '' (which would be ArchUnit's equivalent of null)
-    @Test
-    @UseDataProvider("array_types")
+    @ParameterizedTest
+    @ValueSource(classes = {ClassAccessingOneDimensionalArray.class, ClassAccessingTwoDimensionalArray.class})
     public void adds_package_of_component_type_to_arrays(Class<?> classAccessingArray) {
         JavaClass javaClass = new ClassFileImporter().importPackagesOf(classAccessingArray)
                 .get(classAccessingArray);
@@ -880,9 +869,8 @@ public class ClassFileImporterTest {
         assertThatTypes(classes).matchInAnyOrder(Class11.class, Class12.class);
     }
 
-    @DataProvider
-    public static Object[][] data_ImportOptions_are_respected() {
-        return testForEach(
+    static Stream<ClassFileImporter> importOptions_are_respected() {
+        return Stream.of(
                 new ClassFileImporter().withImportOption(importOnly(ClassFileImporterTest.class, Rule.class)),
                 new ClassFileImporter().withImportOptions(ImmutableSet.of(
                         importOnly(ClassFileImporterTest.class, ClassFileImporterTestUtils.class, Rule.class, Test.class),
@@ -891,9 +879,9 @@ public class ClassFileImporterTest {
         );
     }
 
-    @Test
-    @UseDataProvider
-    public void test_ImportOptions_are_respected(ClassFileImporter importer) throws Exception {
+    @ParameterizedTest
+    @MethodSource
+    public void importOptions_are_respected(ClassFileImporter importer) throws Exception {
         assertThatTypes(importer.importPath(Paths.get(uriOf(getClass())))).matchExactly(getClass());
         assertThatTypes(importer.importUrl(urlOf(getClass()))).matchExactly(getClass());
         assertThatTypes(importer.importJar(jarFileOf(Rule.class))).matchExactly(Rule.class);
